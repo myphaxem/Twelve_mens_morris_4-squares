@@ -1,0 +1,74 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --warn: #f59e0b;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 1200px at 10% 10%, #0b1023 0%, var(--bg) 50%, #0b1023 100%);
+}
+
+.page { max-width: 960px; margin: 0 auto; padding: 16px; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.header h1 { margin: 0; font-size: 20px; font-weight: 700; }
+.controls { display: flex; align-items: center; gap: 8px; }
+.btn { background: var(--panel); color: var(--text); border: 1px solid #333; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.btn:hover { filter: brightness(1.1); }
+
+.hud { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; margin-top: 12px; }
+.status { color: var(--accent); font-weight: 600; }
+.counters { display: flex; gap: 16px; color: var(--muted); }
+
+.board-wrap { margin-top: 12px; }
+.board {
+  position: relative;
+  width: min(92vw, 720px);
+  aspect-ratio: 1 / 1; /* 正方形 */
+  background: url('images/board.png') center/contain no-repeat;
+  border-radius: 12px;
+  outline: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35) inset, 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* 交点 */
+.pt {
+  position: absolute;
+  width: 4.9%;
+  height: 4.9%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+/* 駒の描画（画像） */
+.piece {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.6));
+  user-select: none;
+  pointer-events: none; /* 親にイベント集約 */
+}
+
+/* ハイライト */
+.pt.empty:hover { outline: 2px solid rgba(255,255,255,0.25); }
+.pt.valid { outline: 3px solid #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,0.15); }
+.pt.selectable { outline: 2px dashed #60a5fa; }
+.pt.selected { outline: 4px solid #60a5fa; box-shadow: 0 0 0 6px rgba(96,165,250,0.2); }
+.pt.enemy-removable { outline: 3px solid var(--warn); box-shadow: 0 0 0 6px rgba(245,158,11,0.25); }
+
+.help { margin-top: 14px; color: var(--muted); }
+.help summary { color: var(--text); cursor: pointer; }
+
+/* アクセシビリティ（スクリーンリーダ） */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }

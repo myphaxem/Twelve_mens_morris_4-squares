@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>32点盤モリス</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">
+        <h1>32点盤モリス</h1>
+        <div class="controls">
+          <label>
+            先手：
+            <select id="starter">
+              <option value="blue">青</option>
+              <option value="green">緑</option>
+            </select>
+          </label>
+          <label>
+            ルール：
+            <select id="mode">
+              <option value="m32">32点盤（12枚）</option>
+              <option value="m9">Nine Men's（9枚）</option>
+            </select>
+          </label>
+          <button id="restart" class="btn">リセット</button>
+        </div>
+      </header>
+
+      <section class="hud">
+        <div id="status" class="status">読み込み中…</div>
+        <div class="counters">
+          <div>青：<span id="blue-onboard">0</span>（手持ち <span id="blue-hand">12</span>）</div>
+          <div>緑：<span id="green-onboard">0</span>（手持ち <span id="green-hand">12</span>）</div>
+        </div>
+      </section>
+
+      <section class="board-wrap">
+        <div id="board" class="board" role="application" aria-label="32点盤モリスの盤面" tabindex="0">
+          <!-- 交点ノードはJSで生成 -->
+        </div>
+      </section>
+
+      <details class="help">
+        <summary>あそびかた</summary>
+        <ul>
+          <li>配置フェーズ：交点をクリックして自分の駒を置きます（各9/12枚）。</li>
+          <li>移動フェーズ：自分の駒をクリック→移動先をクリック。3枚しか残っていない場合はどこへでも飛べます。</li>
+          <li>一直線に3枚でミル成立。相手の駒を1枚取り除きます（原則ミル外、全てミルなら中から）。</li>
+          <li>相手が2枚以下になる、または合法手が無くなると勝ち。三foldで引き分け。</li>
+        </ul>
+      </details>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
